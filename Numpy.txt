@@ -1,0 +1,112 @@
+Numpy 的一些属性：
+
+import numpy as np
+
+array = np.array([[1,2,3],[2,3,4]]) 把一个列表转换为一个数组
+array.ndim 维度 2
+array.shape 形状 （2，3）
+array.size 元素数目 6
+
+
+Numpy 创建array：
+
+a = np.array([2,23,4],dtype=np.int)    int 16 32 64  float16 32 64
+a = np.array([[2,23,4],[2,3,4]])
+a = np.zeros((3,4)) 定义全部为0的矩阵
+a = np.ones((3,4))  定义全部为1的矩阵
+a = np.empty((3,4)) 非常接近于0的数字
+a = np.arange(10,20,2) 和range用法相当
+a = np.arange(12).reshape((3,4))
+a = np.linspace(1,10,5) 生成一个线段 共有5个点
+
+Numpy 的基础运算：
+
+a = np.array([10,20,30,40])
+b = np.arange(4)
+
+c = a - b  减法运算
+c = a + b  加法运算
+c = a * b  乘法运算
+c = a**2   平方运算
+c = 10*np.sin(a) 数学运算
+print(b<3) 判断有哪些值小于、大于、等于某个值 输出[True,True,True,False]
+
+矩阵运算
+
+a = np.array([1,1],[0,1])
+b = np.arange(4).reshape((2,2))
+
+逐个相乘 c = a*b 对应元素相乘
+矩阵相乘 c = np.dot(a,b) a.dot(b)
+
+a = np.random.random((2,4))
+
+np.sum(a) np.sum(a,axis=1)axis=1 按行求和 axis=0按列求和
+np.min(a)  a.min()
+np.max(a)  a.max()
+np.mean(a) a.mean()
+np.median(a) 中位数
+
+np.average(a) 没有a.average()平均值
+np.median(a)  没有a.median() 中位数
+
+A = np.arange(2,14),rshape((3,4))
+np.argmin(A)  A最小值的索引
+np.argmax(A)  A最大值的索引
+
+np.cumsum(A) 逐步累加，每个数加上其前面全部值 输出一维
+np.diff(A) 少一列
+np.norzero(A) 输出一个元祖，每一维位置
+np.sort(A)
+np.transpose(A)   or  A.T   矩阵的转置
+np.clip(A,5,9) 所有小于5的都变成5，所有大于9的都变成9
+
+
+
+Numpy 的索引：
+
+A = np.arange(3,15)
+A[3]  一个数
+
+A = np.arange(3,15).reshape((3,4))
+A[2]  一行数    A[1][1] or A[1,1] 一个数
+
+A[2,:]用冒号代替这一行所有的数
+A[:,1]用冒号代替这一列所有的数
+A[1,1:2] 第一行1到2的数
+
+迭代
+
+for row in A:
+    print(row)     输出每行
+for column in A.T:
+    print(column)  输出每列
+for item in A.flat:          A.flatten()
+    print(item)    输出每项
+
+
+Numpy 的array合并：
+
+A = np.array([1,1,1])
+B = np.array([2,2,2])
+
+np.vstack((A,B))上下合并
+np.hstack((A,B))左右合并
+
+若要把一个一维序列变成列向量     [[1],
+                                  [1],
+                                  [1]]
+A[np.newaxis,:] 每行加一个维度
+A[:,np.newaxis] 每列加一个维度
+
+C = np.concatenate((A,B,B,A),axis=0)多个array横向或纵向合并 axis=0纵向合并，axis=1横向合并
+
+
+Numpy 的array分割：
+
+A = np.arange(12).reshape((3,4))
+np.split(A,2,axis=1) 按列分割   axis=0纵向分割   只能进行相等分割
+
+np.array_split(A,3.axis=1)
+np.vsplit(A,3)
+np.hsplit(A,2)
